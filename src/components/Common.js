@@ -11,8 +11,10 @@ function Common() {
     `;
 
     return (
-      <>        
+      <>  
+        
         <CommonPage >공통페이지 입니다.</CommonPage>
+        
       </>
     );
   }

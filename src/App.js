@@ -5,14 +5,16 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Common from './components/Common';
 import SignUp from './pages/SignUp/SignUp';
 import Nav from './components/Nav/nav';
+import Footer from './components/Footer/footer';
 
 
 function App() {
   return (
     <Router>
       <>
-        <Header />
+        <Header />        
         <Nav/>
+        <Footer/>
         <Routes>
           <Route path="/" element={<Common />} />
           <Route path="/login" element={<Login />} />

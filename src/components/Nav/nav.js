@@ -11,7 +11,7 @@ export default function Nav(){
       <div className='nav-container'>
         <div className='left-sidebar'>          
             <ol className='nav-links'>
-            <li aria-label="Go to Home page">
+            <li className='home-page' aria-label="Go to Home page">
             <Link to="/">Home              
             </Link>
             </li>                  
@@ -19,11 +19,11 @@ export default function Nav(){
             <ol className='nav-links'>              
               <li><NavTitle><h2>Public</h2></NavTitle></li>
               <li>
-                <Link to="/nav-question">
+                <Link to="/question">
                   <QuestionIcon/><span>Question</span></Link></li>
-              <li>Tags</li>
-              <li>Users</li>              
-              <li>Companies</li>
+              <li><Link to="/tags">Tags</Link></li>
+              <li><Link to="/users">Users</Link></li>              
+              <li><Link to="/companies">Companies</Link></li>
               <li><NavTitle><h2>Collectives</h2></NavTitle><InfoIcon/></li>
               <li><NavTitle><h2>Teams</h2></NavTitle></li>                                   
             </ol>
@@ -38,7 +38,8 @@ export default function Nav(){
 
 const Container = styled.div`
   display: flex;
-  height: 100%;    
+  height: 100%;      
+  text-align: left;
   
   
   .nav-container{
@@ -47,19 +48,16 @@ const Container = styled.div`
     height: 100%;
     min-width: 164px;
     padding-top: 24px;
-    margin-bottom: 8px;
+    margin-bottom: 8px;    
   }
   .left-sidebar {        
-    position: sticky;
-    width: auto;    
-    margin-bottom: var(--su8);    
-    overflow-y: auto;    
-    top: var(--top-bar-allocated-space);
-    max-height: calc(100vh - var(--top-bar-allocated-space));
-    padding-top: var(--su24);
-    
+        
   }
-  ol{    
+  .home-page{
+      padding-left: 100px;
+      
+    }
+  ol{            
     list-style: none;    
     display: block;    
     margin-block-start: 1em;
@@ -68,10 +66,11 @@ const Container = styled.div`
     margin-inline-end: 0px;
     padding-inline-start: 40px;
   }
-  li {
+  li {    
     text-align: -webkit-match-parent;
-    padding: 4px 4px 4px 30px;
+    padding: 4px 4px 4px 30px;    
   }
+
 
 `
 const NavTitle = styled.div`
