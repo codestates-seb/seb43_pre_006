@@ -7,7 +7,7 @@ function Common() {
     width: 100%;
     padding-top: 50px;
     display: flex;
-    justify-content: center;
+    justify-content: center;    
   `;
 
   return (

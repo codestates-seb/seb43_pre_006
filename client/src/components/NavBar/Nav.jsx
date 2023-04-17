@@ -51,17 +51,20 @@ export default function Nav() {
 }
 
 const Container = styled.div`
+  
   position: relative;
   top: 0;
-  display: flex;
+  display: flex;  
   height: 100%;
   max-width: 164px;
+  min-width: 164px;
 
   .nav-container {
     position: sticky;
+    width:164px;
     height: 100%;
     top: 66px;
-    min-width: 164px;
+    min-width: 164px;    
     border-right: 1px solid rgba(215, 217, 220, 255);
   }
   .left-sidebar {
@@ -71,7 +74,7 @@ const Container = styled.div`
   }
 
   ol {
-    list-style: none;
+    list-style: none;    
     padding-left: 8.5px;
     a {
       text-decoration: none;
