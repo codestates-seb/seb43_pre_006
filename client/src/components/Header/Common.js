@@ -4,7 +4,6 @@ import Nav from "./../NavBar/Nav";
 
 function Common() {
   const CommonPage = styled.div`
-    width: 100%;
     padding-top: 50px;
     display: flex;
     justify-content: center;
@@ -14,7 +13,6 @@ function Common() {
     <>
       <CommonPage>
         <Nav></Nav>
-        <Main />
       </CommonPage>
     </>
   );
