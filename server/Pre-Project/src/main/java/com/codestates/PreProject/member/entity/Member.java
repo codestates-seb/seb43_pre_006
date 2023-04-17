@@ -1,4 +1,4 @@
-package com.codestates.PreProject.member;
+package com.codestates.PreProject.member.entity;
 
 import com.codestates.PreProject.audit.Auditable;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class Member extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    @Column(nullable = false, length = 10)
+    @Column
     private String displayName;
 
     private String email;
