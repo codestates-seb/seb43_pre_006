@@ -16,6 +16,7 @@ export default function Main() {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 50px;
   width: calc(100% - 164px);
   max-width: 1100px;
   padding: calc(24px * 1);
