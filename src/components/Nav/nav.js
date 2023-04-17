@@ -10,24 +10,20 @@ export default function Nav(){
     <Container>
       <div className='nav-container'>
         <div className='left-sidebar'>          
-            <ol className='nav-links'>
+            <ol className='nav-links'>                                          
             <li className='home-page' aria-label="Go to Home page">
             <Link to="/">Home              
             </Link>
-            </li>                  
-            <li>
-            <ol className='nav-links'>              
+            </li>  
               <li><NavTitle><h2>Public</h2></NavTitle></li>
               <li>
                 <Link to="/question">
-                  <QuestionIcon/><span>Question</span></Link></li>
+                  <QuestionIcon/>Question</Link></li>
               <li><Link to="/tags">Tags</Link></li>
               <li><Link to="/users">Users</Link></li>              
               <li><Link to="/companies">Companies</Link></li>
-              <li><NavTitle><h2>Collectives</h2></NavTitle><InfoIcon/></li>
-              <li><NavTitle><h2>Teams</h2></NavTitle></li>                                   
-            </ol>
-            </li>
+              <li className='collectives'><NavTitle><h2>Collectives</h2><InfoIcon/></NavTitle></li>
+              <li><NavTitle><h2>Teams</h2></NavTitle></li>                                               
             </ol>          
         </div>
       </div>
@@ -39,44 +35,41 @@ export default function Nav(){
 const Container = styled.div`
   display: flex;
   height: 100%;      
-  text-align: left;
+  width: 100%;
+  max-width: 164px;  
   
   
-  .nav-container{
-    position: sticky;
-    top: 50px;
+  
+  .nav-container{    
+    margin-top: 50px;
     height: 100%;
     min-width: 164px;
-    padding-top: 24px;
-    margin-bottom: 8px;    
+    padding-top: 24px;      
+    border-right:1px solid rgba(215,217,220,255);
   }
   .left-sidebar {        
-        
+    width: 100%;
   }
-  .home-page{
-      padding-left: 100px;
-      
-    }
+  
+  
   ol{            
-    list-style: none;    
-    display: block;    
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
+    list-style: none;        
+    padding-left: 8.5px;    
+    a{
+    text-decoration:none;
+    color: #525960;
+  }
   }
   li {    
     text-align: -webkit-match-parent;
-    padding: 4px 4px 4px 30px;    
   }
+  
+  `
 
-
-`
 const NavTitle = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between;
+  align-items: center; */  
   margin: 16px 8px 4px 8px;
 
   h2 {

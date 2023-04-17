@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+  
+}
 .toast-message {
   width: 330px;
 }
