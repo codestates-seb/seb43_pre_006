@@ -105,20 +105,20 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:8080/members/signup", {
-        displayName,
-        email,
-        password,
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [displayName, email, password]);
+
+  const signUpSubmit = async () => {
+    try {
+      const response = await axios
+        .post(`http://localhost:8080/members/signup`, {
+          displayName,
+          email,
+          password,
+        })
+        .then(() => navigate('/login'));
+    } catch (error) {
+      window.alert('오류가 발생했습니다. 입력 사항을 확인해 주세요.');
+    }
+  };
 
   // 유효성 검사
   const [isValidName, setIsValidName] = useState(false);
@@ -189,6 +189,22 @@ const SignUp = () => {
       setisValidPassword(true);
     }
   };
+
+  const onSignupHandler = (e) => {
+    e.preventDefault();
+    let validationName = validationNameCheck(displayName);
+    let validationEmail = validationEmailCheck(email);
+    let validationPassword = validationPasswordCheck(password);
+    if (validationName && validationEmail && validationPassword) {
+      signUpSubmit();
+    } else {
+      setIsValidName(!validationName);
+      setIsValidEmail(!validationEmail);
+      setisValidPassword(!validationPassword);
+      return;
+    }
+  };
+
   return (
     <SinUpPage>
       {/* 좌측 컨테이너 */}
@@ -244,6 +260,7 @@ const SignUp = () => {
             bgColor="var(--blue-500)"
             color="#fff"
             border="transparent"
+            onClick={onSignupHandler}
           >
             Sign up
           </CommonButton>
