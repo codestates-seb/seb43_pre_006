@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SingUpLeftSide from "./SingUpLeftSide";
 import { CommonButton } from "./../../Buttons";
 import SocialLogin from "./../../Logins/SocialLogin";
+import axios from "axios";
 
 // 회원가입 페이지 컨테이너
 const SinUpPage = styled.section`
@@ -103,6 +104,21 @@ const SignUp = () => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:8080/members/signup", {
+        displayName,
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [displayName, email, password]);
 
   // 유효성 검사
   const [isValidName, setIsValidName] = useState(false);
