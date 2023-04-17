@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import theme from "./../../../style/theme";
 
 export default function Article2() {
   return (
