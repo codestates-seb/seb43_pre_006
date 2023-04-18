@@ -17,4 +17,7 @@ const Container = styled.div`
   border: solid 1px transparent;
   cursor: pointer;
   margin-bottom: 12px;
+  &:hover {
+    background-color: ${({ theme }) => theme.blue600};
+  }
 `;

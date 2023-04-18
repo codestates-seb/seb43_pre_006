@@ -3,7 +3,6 @@ import styled from "styled-components";
 // import axios from "axios";
 import { useRecoilState } from "recoil";
 import { filterState } from "./../../../store/atom";
-import FilterContainer from "./FilterContainer";
 
 export default function QuestionsBottom() {
   const [listNum, setListNum] = useState(0);
@@ -36,7 +35,7 @@ export default function QuestionsBottom() {
         <Filter onClick={() => setFilterBox(!filterBox)}>
           <svg
             aria-hidden="true"
-            class="svg-icon iconFilter"
+            className="svg-icon iconFilter"
             width="18"
             height="18"
             viewBox="0 0 18 18"
@@ -46,7 +45,6 @@ export default function QuestionsBottom() {
           Filter
         </Filter>
       </FilterBox>
-      {filterBox && <FilterContainer />}
     </Container>
   );
 }
@@ -55,7 +53,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: solid 1px ${({ theme }) => theme.black100};
   padding-bottom: calc(12px * 1);
 
   > .numQuestions {

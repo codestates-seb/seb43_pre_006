@@ -8,7 +8,7 @@ export default function Article3() {
       <div className="textBox">
         <svg
           aria-hidden="true"
-          class="fc-blue-400 d:fc-blue-700 svg-spot spotSearch"
+          className="fc-blue-400 d:fc-blue-700 svg-spot spotSearch"
           width="48"
           height="48"
           viewBox="0 0 48 48"
