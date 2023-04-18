@@ -3,6 +3,9 @@ import sprites from "./images/sprites.svg";
 import Search from "./Search";
 import { LogButton, SignButton } from "./Buttons";
 import { Link, useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { loginState } from "../store/atom";
+
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -78,6 +81,9 @@ const Header = () => {
     navigate("/signup");
   };
 
+  const [loginCheck, setLoginCheck] = useRecoilState(loginState);
+
+
   return (
     /* 헤더 콘테이너 */
     <HeaderContainer>
@@ -93,8 +99,11 @@ const Header = () => {
           <ul>For Teams</ul>
         </ul>
         <Search />
-        <div className="button-container">
-          <LogButton onClick={handleLogin}>Log in</LogButton>
+        <div className="but<ton-container">
+          {loginCheck ?( <h1>로그인 되어있습니다</h1>):
+          (
+            <>
+           <LogButton onClick={handleLogin}>Log in</LogButton>
           <SignButton
             bgColor="var(--blue-500)"
             color="#fff"
@@ -103,6 +112,7 @@ const Header = () => {
           >
             Sign up
           </SignButton>
+          </>)}
         </div>
       </div>
     </HeaderContainer>
