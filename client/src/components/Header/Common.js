@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Main from "./../Main/Main";
 import Nav from "./../NavBar/Nav";
 
 function Common() {
@@ -9,10 +8,11 @@ function Common() {
     justify-content: center;    
   `;
 
+
   return (
     <>
-      <CommonPage>
-        <Nav></Nav>
+      <CommonPage>        
+        <Nav/>
       </CommonPage>
     </>
   );
