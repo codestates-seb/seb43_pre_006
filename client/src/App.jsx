@@ -22,6 +22,8 @@ function App() {
         <Header />
         <Container>
           <Common />
+          {/* 조건부로 현재 경로에 따라서 브라우저에 path name을 가져와서 */}
+
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
