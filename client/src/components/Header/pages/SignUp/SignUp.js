@@ -5,6 +5,9 @@ import SingUpLeftSide from "./SingUpLeftSide";
 import { CommonButton } from "./../../Buttons";
 import SocialLogin from "./../../Logins/SocialLogin";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { loginState } from '../../../store/atom';
+
 
 // 회원가입 페이지 컨테이너
 const SinUpPage = styled.section`
@@ -104,6 +107,7 @@ const SignUp = () => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginCheck, setLoginCheck] = useRecoilState(loginState);
 
 
   const signUpSubmit = async () => {
@@ -197,6 +201,8 @@ const SignUp = () => {
     let validationPassword = validationPasswordCheck(password);
     if (validationName && validationEmail && validationPassword) {
       signUpSubmit();
+      setLoginCheck(!loginCheck)
+      console.log(loginCheck)
     } else {
       setIsValidName(!validationName);
       setIsValidEmail(!validationEmail);
