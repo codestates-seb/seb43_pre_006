@@ -3,27 +3,47 @@ package com.codestates.PreProject.question.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class QuestionDto {
     @Getter
     public static class Post {
         private String title;
+
+        private String content;
         @Setter
-        private Long memberId;
+        private Long userId;
 
         @Setter
         private String email;
 
     }
 
-//    @Getter
-//    @Setter
-//    public static class Response {
-//
-//
-//        private String title;
-//
-//    }
+    @Getter
+    public static class Patch {
+
+        @Setter
+        private Long questionId;
+
+        private String title;
+
+        private String content;
+
+    }
+    @Getter
+    @Setter
+    public static class Response {
+
+        private Long questionId;
+
+        private String title;
+        private String content;
+        private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
+        private Integer likeCount;
+        private Integer viewCount;
+        private String userName;
+        private String userEmail;
+
+    }
 }

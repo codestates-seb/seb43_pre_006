@@ -6,7 +6,16 @@ public enum ExceptionCode {
 
     MEMBER_NOT_FOUND(404, "Member not found"),
 
-    MEMBER_EXISTS(409, "Member exists");
+    MEMBER_EXISTS(409, "Member exists"),
+
+    QUESTION_NOT_FOUND(404, "Member not found"),
+
+    QUESTION_EXISTS(409, "Member exists"),
+
+    VOTE_NOT_TWICE(409,"Vote Not twice"),
+
+    VOTE_NOT_CANCEL(204,"Vote Not cancel"),
+    MEMBER_AUTHENTICATION_ERROR(401,"Member don't match");
 
     @Getter
     private int status;
