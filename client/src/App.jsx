@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { RecoilRoot } from "recoil";
 import Header from "./components/Header/Header";
@@ -14,14 +14,18 @@ import { List } from "./components/Main/Questions/Bottom/ExampleList";
 import AskPage from "./components/Main/Questions/AskPage";
 
 function App() {
+  const location = useLocation();
+  const hide = ["/login", "/signup", "/question/ask"];
+  // 주소값에 따라 Common 컴포넌트 렌더링 막기
+
+  const hideCommon = hide.includes(location.pathname);
+
   return (
     <ThemeProvider theme={theme}>
       <RecoilRoot>
         <Header />
         <Container>
-          <Common />
-          {/* 조건부로 현재 경로에 따라서 브라우저에 path name을 가져와서 */}
-
+          {!hideCommon && <Common />}
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
