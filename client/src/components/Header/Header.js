@@ -5,6 +5,7 @@ import { LogButton, SignButton } from "./Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginState } from "../store/atom";
+import Logout from "./Logout/Logout";
 
 
 const HeaderContainer = styled.header`
@@ -100,7 +101,7 @@ const Header = () => {
         </ul>
         <Search />
         <div className="but<ton-container">
-          {loginCheck ?( <h1>로그인 되어있습니다</h1>):
+          {loginCheck ?( <Logout />):
           (
             <>
            <LogButton onClick={handleLogin}>Log in</LogButton>

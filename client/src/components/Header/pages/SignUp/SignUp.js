@@ -109,7 +109,7 @@ const SignUp = () => {
   const signUpSubmit = async () => {
     try {
       const response = await axios
-        .post(`https://3402-124-111-225-247.jp.ngrok.io/members/signup`, {
+        .post(`https://01aa-124-111-225-247.ngrok-free.app/members/signup`, {
           displayName,
           email,
           password,
