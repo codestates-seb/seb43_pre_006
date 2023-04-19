@@ -8,18 +8,18 @@ export default function QuestionsBottom() {
   const [listNum, setListNum] = useState(0);
   const [filterBox, setFilterBox] = useRecoilState(filterState);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8080/questions")
-  //     .then((response) => {
-  //       const data = response.data;
-  //       const numQuestions = data.length;
-  //       setListNum(numQuestions);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // });
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/questions")
+      .then((response) => {
+        const data = response.data;
+        const numQuestions = data.length;
+        setListNum(numQuestions);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
   return (
     <Container>

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
@@ -9,9 +8,7 @@ import Common from "./components/Header/Common";
 import Login from "./components/Header/pages/Login";
 import SignUp from "./components/Header/pages/SignUp/SignUp";
 import Footer from "./components/Foot/Footer";
-import Nav from "./components/NavBar/Nav";
 import Main from "./components/Main/Main";
-import QuestionsList from "./components/Main/Questions/Bottom/QuestionsList";
 import QuestionItem from "./components/Main/Questions/Bottom/QuestionItem";
 import { List } from "./components/Main/Questions/Bottom/ExampleList";
 
