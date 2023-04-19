@@ -50,7 +50,6 @@ const Container = styled.div`
       font-size: 17px;
       font-weight: 400;
       text-decoration: none;
-      border: solid 1px ${({ theme }) => theme.orange200};
     }
 
     > span {
