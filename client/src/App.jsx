@@ -14,6 +14,7 @@ import Main from "./components/Main/Main";
 import QuestionsList from "./components/Main/Questions/Bottom/QuestionsList";
 import QuestionItem from "./components/Main/Questions/Bottom/QuestionItem";
 import { List } from "./components/Main/Questions/Bottom/ExampleList";
+import AskPage from "./components/Main/Questions/AskPage";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               path="/questions/:questionId"
               element={<QuestionItem data={List.data} />}
             />
+            <Route path="/question/ask" element={<AskPage />} />
           </Routes>
         </Container>
         <Footer />
