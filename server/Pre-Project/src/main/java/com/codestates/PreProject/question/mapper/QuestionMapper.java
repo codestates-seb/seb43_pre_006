@@ -15,7 +15,8 @@ public interface QuestionMapper {
 
     Question questionPatchDtoToQuestion(QuestionDto.Patch requestBody);
 
-    // 소스 Q 엔티티의 변환할 객체, 타겟은 q rdto의 멤버 아이디로 매핑한다
+    @Mapping(source = "member.displayName",target = "userName")
+    @Mapping(source = "member.email",target = "userEmail")
     QuestionDto.Response questionToQuestionResponseDto(Question question);
 
     List<QuestionDto.Response> questionToQuestionResponseDtos(List<Question> questions);

@@ -5,9 +5,10 @@ spring:
       path: /h2
   datasource:
     url: jdbc:h2:mem:test
+
   jpa:
     hibernate:
-      ddl-auto: create  # (1) 스키마 자동 생성
+      ddl-auto: create
     show-sql: true      # (2) SQL 쿼리 출력
     properties:
       hibernate:
@@ -15,9 +16,13 @@ spring:
         highlight_sql: true
         color-codes: true
         use_sql_comments: true
+    defer-datasource-initialization: true # 더미데이터 전 테이블 부터 만듦
+
   sql:
     init:
-      data-locations: classpath*:db/h2/data.sql
+      data-locations: classpath*:db/h2/data.sql # 더미데이터
+      mode: always # 더미데이터 관련
+      platform: h2
   security:
     oauth2:
       client:

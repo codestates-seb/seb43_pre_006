@@ -11,8 +11,6 @@ public class QuestionDto {
         private String title;
 
         private String content;
-        @Setter
-        private Long userId;
 
         @Setter
         private String email;

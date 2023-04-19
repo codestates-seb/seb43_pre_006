@@ -27,8 +27,8 @@ public class QuestionService {
     public Question createQuestion(Question question) {
 
         long authenticatedMemberId = JwtParseInterceptor.getAuthenticatedMemberId();
-        question.setUserId(authenticatedMemberId);
-        verifiyQuestion(question);
+
+        verifiyQuestion(question,authenticatedMemberId);
 
 
         return questionRepository.save(question);
@@ -131,12 +131,12 @@ public class QuestionService {
 
 
     // 질문 등록할때 멤버가 존재하는지 여부 확인 및 세팅
-    private void verifiyQuestion(Question question) {
-        Optional<Member> findMember = memberRepository.findById(question.getUserId());
+    private void verifiyQuestion(Question question,long authenticatedMemberId) {
+        Optional<Member> findMember = memberRepository.findById(authenticatedMemberId);
         Member member = findMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         question.setMember(member);
-        question.setUserName(member.getDisplayName());
-        question.setUserEmail(member.getEmail());
+//        question.setUserName(member.getDisplayName());
+//        question.setUserEmail(member.getEmail());
     }
 
     // 질문아이디로 질문이 존재하는지 확인
