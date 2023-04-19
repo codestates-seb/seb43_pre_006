@@ -1,5 +1,6 @@
 package com.codestates.PreProject.question.entity;
 
+
 import com.codestates.PreProject.answer.entity.Answer;
 import com.codestates.PreProject.audit.Auditable;
 import com.codestates.PreProject.member.entity.Member;
@@ -11,14 +12,17 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
+
+@Entity
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
 public class Question extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long QuestionId;
+    private Long questionId;
+
 
     @Column(nullable = false)
     private String title;
@@ -34,6 +38,24 @@ public class Question extends Auditable {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // 같이 삭제되게
     private List<Answer> answers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "question")
+    private List<VoteOfQuestion> voteOfQuestions = new ArrayList<>();
+
+    public void setMember(Member member) {
+        this.member = member;
+        if (!this.member.getQuestions().contains(this)) {
+            this.member.getQuestions().add(this);
+        }
+    }
+
+    public void setVoteOfQuestions(VoteOfQuestion voteOfQuestions) {
+        this.voteOfQuestions.add(voteOfQuestions);
+        if (voteOfQuestions.getQuestion() != this){
+            voteOfQuestions.setQuestion(this);
+        }
+    }
 }
