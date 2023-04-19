@@ -1,5 +1,6 @@
 package com.codestates.PreProject.question.entity;
 
+import com.codestates.PreProject.answer.entity.Answer;
 import com.codestates.PreProject.audit.Auditable;
 import com.codestates.PreProject.member.entity.Member;
 import lombok.Getter;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -31,6 +34,6 @@ public class Question extends Auditable {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-
-
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // 같이 삭제되게
+    private List<Answer> answers = new ArrayList<>();
 }

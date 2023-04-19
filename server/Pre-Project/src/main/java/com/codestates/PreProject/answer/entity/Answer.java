@@ -4,6 +4,7 @@ import com.codestates.PreProject.audit.Auditable;
 import com.codestates.PreProject.member.entity.Member;
 import com.codestates.PreProject.question.entity.Question;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class Answer extends Auditable {
 
     @Id
@@ -18,6 +20,7 @@ public class Answer extends Auditable {
     private Long answerId;
 
     private String content;
+
 
     private int likeCount;
 
@@ -28,6 +31,7 @@ public class Answer extends Auditable {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
 
 
 }

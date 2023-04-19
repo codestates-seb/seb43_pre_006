@@ -6,7 +6,6 @@ import com.codestates.PreProject.question.dto.QuestionPostDto;
 import com.codestates.PreProject.question.entity.Question;
 import com.codestates.PreProject.question.mapper.QuestionMapper;
 import com.codestates.PreProject.question.service.QuestionService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

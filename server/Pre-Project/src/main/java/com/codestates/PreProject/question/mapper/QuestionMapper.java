@@ -1,7 +1,5 @@
 package com.codestates.PreProject.question.mapper;
 
-import com.codestates.PreProject.member.dto.MemberResponseDto;
-import com.codestates.PreProject.member.entity.Member;
 import com.codestates.PreProject.question.dto.QuestionPatchDto;
 import com.codestates.PreProject.question.dto.QuestionPostDto;
 import com.codestates.PreProject.question.dto.QuestionResponseDto;
