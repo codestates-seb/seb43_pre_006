@@ -1,5 +1,4 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import SideBar from "./SideBar/SideBar";
 import QuestionsPage from "./Questions/QuestionsPage";
