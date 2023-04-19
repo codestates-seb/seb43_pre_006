@@ -1,5 +1,6 @@
 package com.codestates.PreProject.question.mapper;
 
+
 import com.codestates.PreProject.question.dto.QuestionDto;
 import com.codestates.PreProject.question.entity.Question;
 import org.mapstruct.Mapper;
@@ -11,6 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionMapper {
 
+
     Question questionPostDtoToQuestion(QuestionDto.Post requestBody);
 
     Question questionPatchDtoToQuestion(QuestionDto.Patch requestBody);
@@ -20,4 +22,5 @@ public interface QuestionMapper {
     QuestionDto.Response questionToQuestionResponseDto(Question question);
 
     List<QuestionDto.Response> questionToQuestionResponseDtos(List<Question> questions);
+
 }

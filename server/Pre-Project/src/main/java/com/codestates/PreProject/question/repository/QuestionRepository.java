@@ -2,6 +2,7 @@ package com.codestates.PreProject.question.repository;
 
 import com.codestates.PreProject.question.entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
@@ -28,4 +29,5 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     @Modifying
     @Query(value = "DELETE FROM vote_of_question WHERE question_id = :questionId and member_id = :memberId", nativeQuery = true)
     int downVote(long questionId, long memberId);
+
 }

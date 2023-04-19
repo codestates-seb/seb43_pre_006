@@ -1,5 +1,6 @@
 package com.codestates.PreProject.member.service;
 
+
 import com.codestates.PreProject.auth.utils.CustomAuthorityUtils;
 import com.codestates.PreProject.exception.BusinessLogicException;
 import com.codestates.PreProject.exception.ExceptionCode;
@@ -45,5 +46,6 @@ public class MemberService {
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if(member.isPresent()) throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
+
     }
 }
