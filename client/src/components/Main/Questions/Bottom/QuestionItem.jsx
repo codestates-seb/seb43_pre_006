@@ -1,13 +1,15 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import SideBar from "./SideBar/SideBar";
-import QuestionsPage from "./Questions/QuestionsPage";
 
-export default function Main() {
+export default function QuestionItem({ data }) {
+  const { questionId } = useParams();
+  const question = data.find((el) => el.questionId === parseInt(questionId));
+
   return (
     <Container>
-      <QuestionsPage></QuestionsPage>
-      <SideBar></SideBar>
+      <h1>{question.title}</h1>
+      <p>{question.content}</p>
     </Container>
   );
 }

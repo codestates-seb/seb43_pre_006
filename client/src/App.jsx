@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
@@ -9,7 +8,9 @@ import Common from "./components/Header/Common";
 import Login from "./components/Header/pages/Login";
 import SignUp from "./components/Header/pages/SignUp/SignUp";
 import Footer from "./components/Foot/Footer";
-import Nav from "./components/NavBar/Nav";
+import Main from "./components/Main/Main";
+import QuestionItem from "./components/Main/Questions/Bottom/QuestionItem";
+import { List } from "./components/Main/Questions/Bottom/ExampleList";
 
 function App() {
   return (
@@ -17,10 +18,15 @@ function App() {
       <RecoilRoot>
         <Header />
         <Container>
+          <Common />
           <Routes>
-            <Route path="/" element={<Common />} />
+            <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/questions/:questionId"
+              element={<QuestionItem data={List.data} />}
+            />
           </Routes>
         </Container>
         <Footer />
