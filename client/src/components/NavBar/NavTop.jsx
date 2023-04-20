@@ -4,7 +4,34 @@ import { ReactComponent as QuestionIcon } from "../Header/images/questionIcon.sv
 import { ReactComponent as CollectiveIcon } from "../Header/images/collectivesIcon.svg";
 import { Link } from "react-router-dom";
 
-export default function NavTop(){
+export default function NavTop(){  
+  const NavList ={
+    data: [
+      {
+        navId: 1,
+        className:'public-li',
+        title: 'Questions',
+        icon:<QuestionIcon/>
+      },
+      {
+        navId: 2,
+        className:'public-li',
+        title: 'Tags',
+      },
+      {
+        navId: 3,
+        className:'public-li',
+        title: 'Users',
+      },
+      {
+        navId: 4,
+        className:'public-li',
+        title: 'Companies',
+      },
+    ]
+  }
+  const navList = NavList.data
+  
   return (
     <Container>
       <div className="nav-container">
@@ -18,21 +45,34 @@ export default function NavTop(){
                   <h2>Public</h2>
                 </NavTitle>
               </li>
-              <li className='icon-li question-li'>
+              {/* <li className='icon-li question-li'> */}              
+              {/* <li className='icon-li question-li'>
                   <QuestionIcon />
-                <Link to="/">
-                  Question
-                </Link>
+                <Link to="/">Questions</Link>
               </li>
               <li className='public-li'>
                 <Link to="/tags">Tags</Link>
               </li>
               <li className='public-li'>
-                <Link to="/">Users</Link>
+                <Link to="/users">Users</Link>
               </li>
               <li className='public-li'>
-                <Link to="/">Companies</Link>
-              </li>
+                <Link to="/companies">Companies</Link>
+              </li> */}
+                {navList.map((navItem) => (
+                  <li key={navItem.navId} className={navItem.className}>
+                    <Link to={`/${navItem.title.toLowerCase()}`}>
+                      {navItem.title === 'Questions' ? (
+                        <>
+                          {navItem.icon}
+                          {navItem.title}
+                        </>
+                      ) : (
+                        navItem.title
+                      )}
+                    </Link>
+                  </li>
+                ))}
               <li className="collectives">              
                   <h2>Collectives</h2><InfoIcon />              
               </li>
@@ -53,7 +93,7 @@ export default function NavTop(){
 
 const Container =styled.div`
   position: sticky;    
-  border-right: 1px solid rgba(215, 217, 220, 255);
+  border-right: 1px solid ${({theme})=>theme.black100};
   width: auto;  
   >.nav-container {        
     height: 95%;
@@ -72,7 +112,7 @@ const Container =styled.div`
           padding-left: 32.5px;
         }
         .teams-area{
-          border-bottom: 1px solid rgba(215, 217, 220, 255);
+          border-bottom: 1px solid ${({theme})=>theme.black100};
         }
         .question-li{
           font-weight: bold;
