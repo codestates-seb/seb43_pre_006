@@ -3,11 +3,19 @@ import styled from "styled-components";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { filterState } from "./../../../store/atom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 export default function QuestionsBottom() {
   const [listNum, setListNum] = useState(0);
   const [filterBox, setFilterBox] = useRecoilState(filterState);
 
+  const location = useLocation();
+  const path = location.pathname;
+  // 주소값 가져오기
+
+  // 쿼리 스트링 가져오기 찾아보기
+
+  console.log(path);
   useEffect(() => {
     axios
       .get("http://localhost:8080/questions")
@@ -19,17 +27,23 @@ export default function QuestionsBottom() {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   return (
     <Container>
       <div className="numQuestions">{listNum} questions</div>
       <FilterBox>
         <BtnBox>
-          <StyledButton>Newest</StyledButton>
-          <StyledButton>Active</StyledButton>
-          <StyledButton>Bountied</StyledButton>
-          <StyledButton>Unanswered</StyledButton>
+          <StyledButton isSelected={path === "/"}>Newest</StyledButton>
+          <StyledButton>
+            <Link to="/?tab=Active">Active</Link>
+          </StyledButton>
+          <StyledButton>
+            <Link to="/?tab=Boutied">Bountied</Link>
+          </StyledButton>
+          <StyledButton>
+            <Link to="/?tab=Unanswered">Unanswered</Link>
+          </StyledButton>
           <StyledButton>More</StyledButton>
         </BtnBox>
         <Filter onClick={() => setFilterBox(!filterBox)}>
@@ -107,13 +121,18 @@ const Filter = styled.button`
 `;
 
 const StyledButton = styled.button`
-  background-color: #ffffff;
+  background-color: ${({ isSelected, theme }) =>
+    isSelected ? theme.black200 : "#ffffff"};
   border: none;
   padding: 10px;
   border-right: solid 1px gray;
   cursor: pointer;
   color: ${({ isSelected, theme }) =>
     isSelected ? theme.black700 : theme.black500};
+
+  > a {
+    text-decoration: none;
+  }
 
   &:last-child {
     border-right: none;
