@@ -6,6 +6,8 @@ export default function ItemContent({ data }) {
   const { questionId } = useParams();
   const question = data.find((el) => el.questionId === parseInt(questionId));
 
+  // 데인저러스 html
+
   return (
     <Container>
       <p>{question.content}</p>
