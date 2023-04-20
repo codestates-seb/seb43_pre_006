@@ -4,6 +4,7 @@ import { ReactComponent as LoginLogo } from "../images/loginlogo.svg";
 import BasicLogin from "./../Logins/BasicLogin";
 import SocialLogin from "./../Logins/SocialLogin";
 
+/* test */
 const LoginPage = styled.section`
   width: 100%;
   height: 100vh;
