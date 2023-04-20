@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { List } from "./ExampleList";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function QuestionsList() {
   const list = List.data;
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       "https://042c-124-111-225-247.ngrok-free.app/questions?page=1&size=10"
+  //     )
+  //     .then((res) => console.log(res));
+  // });
+
   return (
     <>
       {list.map((el, idx) => (
