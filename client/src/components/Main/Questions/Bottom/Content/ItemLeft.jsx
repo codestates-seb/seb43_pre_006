@@ -1,10 +1,33 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 export default function ItemLeft({ data }) {
   const { questionId } = useParams();
   const question = data.find((el) => el.questionId === parseInt(questionId));
+
+  const handleClick = () => {
+    const cookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("user="));
+    if (cookie) {
+      const userId = cookie.split("=")[1];
+      axios
+        .patch(`http://yourserver.com/api/questions/${questionId}`, {
+          score: question.score + 1,
+          userId,
+        })
+        .then((response) => {
+          console.log("Score updated successfully");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      console.log("User is not logged in");
+    }
+  };
 
   const UpBtn = styled.svg`
     fill: ${({ theme }) => theme.black100};
@@ -33,7 +56,7 @@ export default function ItemLeft({ data }) {
 
   return (
     <Container>
-      <UpBtn viewBox="0 0 36 36">
+      <UpBtn onClick={handleClick} viewBox="0 0 36 36">
         <path d="M2 25h32L18 9 2 25Z"></path>
       </UpBtn>
       <span>{question.score}</span>
