@@ -9,16 +9,29 @@ export default function QuestionsBottom() {
   const [listNum, setListNum] = useState(0);
   const [filterBox, setFilterBox] = useRecoilState(filterState);
 
-  const location = useLocation();
+  const location = useLocation(); // URL
   const path = location.pathname;
   // 주소값 가져오기
+  const searchParams = new URLSearchParams(location.search); // 쿼리 스트링을 읽을 수 있다.
+  const tab = searchParams.get("tab"); // localhost:3000/questions?"tab"=Active&page=3
+  const isTabActive = tab === "Active"; //ture or false
+  const isTabBountied = tab === "Bountied";
+  const isTabUnanswered = tab === "Unanswered";
+  const isTabNewest = !tab;
 
   // 쿼리 스트링 가져오기 찾아보기
 
-  console.log(path);
   useEffect(() => {
     axios
-      .get("http://localhost:8080/questions")
+      .get(
+        "https://5517-124-111-225-247.ngrok-free.app/questions?page=1&size=10",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "69420",
+          },
+        }
+      )
       .then((response) => {
         const data = response.data;
         const numQuestions = data.length;
@@ -27,21 +40,23 @@ export default function QuestionsBottom() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  });
 
   return (
     <Container>
       <div className="numQuestions">{listNum} questions</div>
       <FilterBox>
         <BtnBox>
-          <StyledButton isSelected={path === "/"}>Newest</StyledButton>
-          <StyledButton>
+          <StyledButton isSelected={isTabNewest}>
+            <Link to="/">Newest</Link>
+          </StyledButton>
+          <StyledButton isSelected={isTabActive}>
             <Link to="/?tab=Active">Active</Link>
           </StyledButton>
-          <StyledButton>
-            <Link to="/?tab=Boutied">Bountied</Link>
+          <StyledButton isSelected={isTabBountied}>
+            <Link to="/?tab=Bountied">Bountied</Link>
           </StyledButton>
-          <StyledButton>
+          <StyledButton isSelected={isTabUnanswered}>
             <Link to="/?tab=Unanswered">Unanswered</Link>
           </StyledButton>
           <StyledButton>More</StyledButton>
@@ -127,11 +142,11 @@ const StyledButton = styled.button`
   padding: 10px;
   border-right: solid 1px gray;
   cursor: pointer;
-  color: ${({ isSelected, theme }) =>
-    isSelected ? theme.black700 : theme.black500};
 
   > a {
     text-decoration: none;
+    color: ${({ isSelected, theme }) =>
+      isSelected ? theme.white : theme.black500};
   }
 
   &:last-child {
