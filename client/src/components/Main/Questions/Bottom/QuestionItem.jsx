@@ -1,24 +1,84 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+import AddAsk from "./../Top/AddAsk";
+import SideBar from "./../../SideBar/SideBar";
+import ItemContent from "./Content/ItemContent";
+import ItemTop from "./Content/ItemTop";
+import ItemLeft from "./Content/ItemLeft";
+import QuestionPageEditor from "./Content/QuestionPageEditor";
+import axios from "axios";
 
 export default function QuestionItem({ data }) {
   const { questionId } = useParams();
   const question = data.find((el) => el.questionId === parseInt(questionId));
+  // params와 일치하는 id 값을 찾아서, 내용 작성
+  console.log(question);
+  useEffect(() => {
+    axios
+      .get(
+        "https://01aa-124-111-225-247.ngrok-free.app/questions?page=1&size=10"
+      )
+      .then((res) => console.log(res));
+  });
 
   return (
     <Container>
-      <h1>{question.title}</h1>
-      <p>{question.content}</p>
+      <div className="top">
+        <ItemTop data={data} />
+        <Link to={"/question/ask"}>
+          <AddAsk />
+        </Link>
+      </div>
+      <div className="bottom">
+        <ItemContainer>
+          <div className="flex-style">
+            <ItemLeft data={data} />
+            <ItemContent data={data} />
+          </div>
+          <QuestionPageEditor />
+        </ItemContainer>
+        <SideBar />
+      </div>
     </Container>
   );
 }
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   margin-top: 50px;
   width: calc(100% - 164px);
   max-width: 1100px;
   padding: calc(24px * 1);
+
+  > .top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    border-bottom: solid 1px ${({ theme }) => theme.black100};
+    padding-bottom: 8px;
+
+    > a {
+      text-decoration: none;
+    }
+  }
+
+  > .bottom {
+    display: flex;
+    padding-top: 16px;
+  }
+`;
+
+const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: auto;
+  .flex-style {
+    display: grid;
+    grid-template-columns: -webkit-max-content 1fr;
+    grid-template-columns: max-content 1fr;
+  }
 `;

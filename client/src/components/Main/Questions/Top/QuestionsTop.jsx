@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import AddAsk from "./AddAsk";
+import { Link } from "react-router-dom";
 
 export default function QuestionsTop() {
   return (
     <Container>
       <span>All Questions</span>
-      <AddAsk />
+      <Link to={"/question/ask"}>
+        <AddAsk />
+      </Link>
     </Container>
   );
 }
@@ -24,5 +27,9 @@ const Container = styled.div`
     font-weight: normal;
     line-height: 1.3rem;
     margin-bottom: 12px;
+  }
+
+  > a {
+    text-decoration: none;
   }
 `;

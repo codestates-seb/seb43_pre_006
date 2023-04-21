@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SingUpLeftSide from "./SingUpLeftSide";
 import { CommonButton } from "./../../Buttons";
 import SocialLogin from "./../../Logins/SocialLogin";
+import axios from "axios";
 
 // 회원가입 페이지 컨테이너
 const SinUpPage = styled.section`
@@ -104,6 +105,21 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
+  const signUpSubmit = async () => {
+    try {
+      const response = await axios
+        .post(`https://01aa-124-111-225-247.ngrok-free.app/members/signup`, {
+          displayName,
+          email,
+          password,
+        })
+        .then(() => navigate('/login'));
+    } catch (error) {
+      window.alert('오류가 발생했습니다. 입력 사항을 확인해 주세요.');
+    }
+  };
+
   // 유효성 검사
   const [isValidName, setIsValidName] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -173,6 +189,22 @@ const SignUp = () => {
       setisValidPassword(true);
     }
   };
+
+  const onSignupHandler = (e) => {
+    e.preventDefault();
+    let validationName = validationNameCheck(displayName);
+    let validationEmail = validationEmailCheck(email);
+    let validationPassword = validationPasswordCheck(password);
+    if (validationName && validationEmail && validationPassword) {
+      signUpSubmit();
+    } else {
+      setIsValidName(!validationName);
+      setIsValidEmail(!validationEmail);
+      setisValidPassword(!validationPassword);
+      return;
+    }
+  };
+
   return (
     <SinUpPage>
       {/* 좌측 컨테이너 */}
@@ -228,6 +260,7 @@ const SignUp = () => {
             bgColor="var(--blue-500)"
             color="#fff"
             border="transparent"
+            onClick={onSignupHandler}
           >
             Sign up
           </CommonButton>

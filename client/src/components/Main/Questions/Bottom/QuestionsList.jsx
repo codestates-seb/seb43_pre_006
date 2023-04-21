@@ -25,17 +25,18 @@ export default function QuestionsList() {
 }
 
 const Container = styled.div`
-  border-top: solid 1px ${({ theme }) => theme.black100};
   display: flex;
   padding: 16px;
   font-size: 13px;
+  border-top: solid 1px ${({ theme }) => theme.black100};
 
   > .left {
+    width: 108px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     margin: 0 16px 4px 0;
     text-align: right;
-    width: 108px;
   }
 
   > .right {
@@ -43,9 +44,23 @@ const Container = styled.div`
     flex-direction: column;
     padding-right: 24px;
 
-    & Link {
+    > a {
+      color: ${({ theme }) => theme.blue600};
+      margin: -2px 0 5px;
       font-size: 17px;
+      font-weight: 400;
       text-decoration: none;
+    }
+
+    > span {
+      hyphens: auto !important;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      margin-bottom: 8px;
     }
   }
 `;

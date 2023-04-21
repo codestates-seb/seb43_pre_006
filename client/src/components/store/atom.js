@@ -5,6 +5,11 @@ export const filterState = atom({
   default: false,
 });
 
+export const loginState = atom({
+  key: "loginState",
+  default: false,
+});
+
 export const liClickEvent = atom({
   key: "liClickEvent",
   default:"li",
