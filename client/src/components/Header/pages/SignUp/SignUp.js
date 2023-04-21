@@ -1,4 +1,4 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SingUpLeftSide from "./SingUpLeftSide";
@@ -105,18 +105,27 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   const signUpSubmit = async () => {
     try {
       const response = await axios
-        .post(`https://01aa-124-111-225-247.ngrok-free.app/members/signup`, {
-          displayName,
-          email,
-          password,
-        })
-        .then(() => navigate('/login'));
+        .post(
+          `https://5517-124-111-225-247.ngrok-free.app/members/signup`,
+          {
+            displayName,
+            email,
+            password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
+        )
+        .then(() => navigate("/login"));
     } catch (error) {
-      window.alert('오류가 발생했습니다. 입력 사항을 확인해 주세요.');
+      console.log(error);
+      window.alert("오류가 발생했습니다. 입력 사항을 확인해 주세요.");
     }
   };
 
