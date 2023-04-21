@@ -25,7 +25,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtTokenizer jwtTokenizer;
-//    private final CustomAuthorityUtils authorityUtils;
+    //    private final CustomAuthorityUtils authorityUtils;
     private final MemberService memberService;
 
     @Override
