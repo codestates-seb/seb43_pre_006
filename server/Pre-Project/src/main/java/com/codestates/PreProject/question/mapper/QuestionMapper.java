@@ -1,7 +1,7 @@
 package com.codestates.PreProject.question.mapper;
 
-
 import com.codestates.PreProject.question.dto.QuestionDto;
+import com.codestates.PreProject.question.entity.CommentOfQuestion;
 import com.codestates.PreProject.question.entity.Question;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,4 +23,9 @@ public interface QuestionMapper {
 
     List<QuestionDto.Response> questionToQuestionResponseDtos(List<Question> questions);
 
+
+    @Mapping(source = "question.questionId",target = "questionId")
+    @Mapping(source = "member.displayName",target = "userName")
+    @Mapping(source = "member.email", target = "userEmail")
+    CommentOfQuestionDto.Response commentToCommentResponse(CommentOfQuestion commentOfQuestion);
 }

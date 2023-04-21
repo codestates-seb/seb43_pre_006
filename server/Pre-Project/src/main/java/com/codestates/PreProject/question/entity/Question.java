@@ -7,6 +7,9 @@ import com.codestates.PreProject.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -45,6 +48,9 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question")
     private List<VoteOfQuestion> voteOfQuestions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question")
+    private List<CommentOfQuestion> commentOfQuestions = new ArrayList<>();
+
     public void setMember(Member member) {
         this.member = member;
         if (!this.member.getQuestions().contains(this)) {
@@ -58,4 +64,13 @@ public class Question extends Auditable {
             voteOfQuestions.setQuestion(this);
         }
     }
+
+    public void setCommentOfQuestion(CommentOfQuestion commentOfQuestion){
+        commentOfQuestions.add(commentOfQuestion);
+        if(commentOfQuestion.getQuestion() != this){
+            commentOfQuestion.setQuestion(this);
+        }
+    }
+
+
 }

@@ -1,10 +1,15 @@
 package com.codestates.PreProject.question.repository;
 
 import com.codestates.PreProject.question.entity.Question;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question,Long> {
 
@@ -30,4 +35,6 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     @Query(value = "DELETE FROM vote_of_question WHERE question_id = :questionId and member_id = :memberId", nativeQuery = true)
     int downVote(long questionId, long memberId);
 
+    // findBy~~ + 뒤에 Containing을 붙이면 Like와 같은 쿼리조회를함
+    Page<Question> findByTitleContaining(String title, Pageable pageable);
 }

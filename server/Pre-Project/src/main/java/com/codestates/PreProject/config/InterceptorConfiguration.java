@@ -20,7 +20,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor( new JwtParseInterceptor(jwtUtils()))
                 .addPathPatterns("/questions")
-                .addPathPatterns("/questions/**");
+                .addPathPatterns("/questions/**")
+                .addPathPatterns("/commentsOfQuestion/*");
     }
 
 
