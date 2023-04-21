@@ -1,9 +1,11 @@
 package com.codestates.PreProject.question.dto;
 
+import com.codestates.PreProject.question.entity.CommentOfQuestion;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class QuestionDto {
     @Getter
@@ -42,6 +44,8 @@ public class QuestionDto {
         private Integer viewCount;
         private String userName;
         private String userEmail;
+
+        List<CommentOfQuestionDto.Response> commentOfQuestions;
 
     }
 }

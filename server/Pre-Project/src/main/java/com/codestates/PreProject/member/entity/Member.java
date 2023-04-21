@@ -3,6 +3,7 @@ package com.codestates.PreProject.member.entity;
 
 import com.codestates.PreProject.answer.entity.Answer;
 import com.codestates.PreProject.audit.Auditable;
+import com.codestates.PreProject.question.entity.CommentOfQuestion;
 import com.codestates.PreProject.question.entity.Question;
 import com.codestates.PreProject.question.entity.VoteOfQuestion;
 
@@ -45,6 +46,10 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member")
     private List<VoteOfQuestion> voteOfQuestions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<CommentOfQuestion> commentOfQuestions = new ArrayList<>();
+
+
     public void setQuestion(Question question) { // 관계편의메서드 추가하기 쉽게 설계했고
         questions.add(question);
         if(question.getMember() != this)
@@ -55,6 +60,13 @@ public class Member extends Auditable {
         voteOfQuestions.add(voteOfQuestion);
         if(voteOfQuestion.getMember() != this){
             voteOfQuestion.setMember(this);
+        }
+    }
+
+    public void setCommentOfQuestion(CommentOfQuestion commentOfQuestion){
+        commentOfQuestions.add(commentOfQuestion);
+        if(commentOfQuestion.getMember() != this){
+            commentOfQuestion.setMember(this);
         }
     }
 

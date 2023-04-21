@@ -13,12 +13,15 @@ import com.codestates.PreProject.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -77,10 +80,49 @@ public class QuestionService {
         return findVerifiedQuestion(id);
     }
 
+    // questionId순 정렬
     @Transactional(readOnly = true)
     public Page<Question> findQuestions(int page, int size) {
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
+
+    // 조회수순 정렬
+    @Transactional(readOnly = true)
+    public Page<Question> findQuestionsByView(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("viewCount").descending()));
+    }
+
+    // 좋아요순 정렬
+    @Transactional(readOnly = true)
+    public Page<Question> findQuestionsByLike(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("likeCount").descending()));
+    }
+
+    // 검색 기능
+    public Page<Question> searchByTitle(String title,int page, int size){
+        if(title == null) title = "";
+
+//        List<Question> listQuestion = questionRepository.findByTitleContaining(title);
+//
+//        Page<Question> searchQuestions = listQuestionByPage(listQuestion,page,size);
+        PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by("questionId").descending());
+        Page<Question> byTitleContaining = questionRepository.findByTitleContaining(title, pageRequest);
+        return byTitleContaining;
+//        return searchQuestions;
+    }
+
+
+//    // List를 Page로 만들어주는 메서드 ( 검색 기능에 활용 )
+//    public Page<Question> listQuestionByPage(List<Question> questions, int pageNo, int pageSize){
+//        int startIndex = (pageNo - 1) * pageSize;
+//        int endIndex = Math.min(startIndex + pageSize, questions.size());
+//
+//        List<Question> sublist = questions.subList(startIndex, endIndex);
+//        PageRequest pageRequest = PageRequest.of(pageNo - 1, pageSize, Sort.by("questionId").descending());
+//        return new PageImpl<>(sublist, pageRequest, questions.size());
+//
+//    }
+
 
     // 좋아요 로직
     public Question createVote(long questionId){
