@@ -1,9 +1,12 @@
 package com.codestates.PreProject.member.entity;
 
+
+import com.codestates.PreProject.answer.entity.Answer;
 import com.codestates.PreProject.audit.Auditable;
 import com.codestates.PreProject.question.entity.CommentOfQuestion;
 import com.codestates.PreProject.question.entity.Question;
 import com.codestates.PreProject.question.entity.VoteOfQuestion;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +25,7 @@ public class Member extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
+
     @Column(nullable = false)
     private String displayName;
 
@@ -29,6 +33,10 @@ public class Member extends Auditable {
 
     private String password;
 
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Answer> answers = new ArrayList<>();
+    
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
@@ -65,4 +73,5 @@ public class Member extends Auditable {
     public Member(String email) {
         this.email = email;
     }
+
 }

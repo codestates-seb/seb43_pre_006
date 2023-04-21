@@ -1,20 +1,24 @@
 package com.codestates.PreProject.question.service;
 
+
 import com.codestates.PreProject.auth.interceptor.JwtParseInterceptor;
 import com.codestates.PreProject.exception.BusinessLogicException;
 import com.codestates.PreProject.exception.ExceptionCode;
 import com.codestates.PreProject.member.entity.Member;
 import com.codestates.PreProject.member.repository.MemberRepository;
 import com.codestates.PreProject.question.entity.Question;
+
 import com.codestates.PreProject.question.entity.VoteOfQuestion;
 import com.codestates.PreProject.question.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -24,20 +28,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class QuestionService {
+
     private final QuestionRepository questionRepository;
     private final MemberRepository memberRepository;
 
     public Question createQuestion(Question question) {
 
+
         long authenticatedMemberId = JwtParseInterceptor.getAuthenticatedMemberId();
 
         verifiyQuestion(question,authenticatedMemberId);
 
-
         return questionRepository.save(question);
 
     }
-
 
 
     public Question updateQuestion(Question question) {
@@ -66,7 +70,6 @@ public class QuestionService {
 
         questionRepository.delete(findQuestion);
     }
-
 
     public Question findQuestion(long id) {
 

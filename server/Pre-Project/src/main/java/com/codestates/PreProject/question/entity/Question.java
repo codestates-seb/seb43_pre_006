@@ -1,5 +1,7 @@
 package com.codestates.PreProject.question.entity;
 
+
+import com.codestates.PreProject.answer.entity.Answer;
 import com.codestates.PreProject.audit.Auditable;
 import com.codestates.PreProject.member.entity.Member;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Getter
 @Setter
@@ -22,6 +25,7 @@ public class Question extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
+
 
     @Column(nullable = false)
     private String title;
@@ -36,6 +40,10 @@ public class Question extends Auditable {
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // 같이 삭제되게
+    private List<Answer> answers = new ArrayList<>();
 
     @OneToMany(mappedBy = "question")
     private List<VoteOfQuestion> voteOfQuestions = new ArrayList<>();
