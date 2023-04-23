@@ -4,6 +4,7 @@ import com.codestates.PreProject.answer.dto.AnswerDto;
 import com.codestates.PreProject.answer.entity.Answer;
 import com.codestates.PreProject.answer.mapper.AnswerMapper;
 import com.codestates.PreProject.answer.service.AnswerService;
+import com.codestates.PreProject.dto.SingleResponseDto;
 import com.codestates.PreProject.globaldto.MultiResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,23 +28,23 @@ public class AnswerController {
 
     @PostMapping
     public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
-                                         @Validated  @RequestBody AnswerDto.AnswerPostDto answerPostDto) {
+                                         @Validated  @RequestBody AnswerDto.AnswerPostDto requestBody) {
 
 
-        Answer answer = mapper.answerPostDtoToAnswer(answerPostDto);
+        Answer answer = mapper.answerPostDtoToAnswer(requestBody);
 
         answerService.createAnswer(answer, questionId);
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer), HttpStatus.CREATED);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)), HttpStatus.CREATED);
 
     }
 
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
-                                      @Validated @RequestBody AnswerDto.AnswerPatchDto answerPatchDto) {
-        answerPatchDto.setAnswerId(answerId);
+                                      @Validated @RequestBody AnswerDto.AnswerPatchDto requestBody) {
+        requestBody.setAnswerId(answerId);
 
-        Answer answer = mapper.answerPatchDtoToAnswer(answerPatchDto); // 수정하고자 하는 값
+        Answer answer = mapper.answerPatchDtoToAnswer(requestBody); // 수정하고자 하는 값
         Answer answer1 = answerService.updateAnswer(answer); // 수정된 값
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer1), HttpStatus.CREATED);
