@@ -1,5 +1,6 @@
 package com.codestates.PreProject.question.mapper;
 
+import com.codestates.PreProject.question.dto.CommentOfQuestionDto;
 import com.codestates.PreProject.question.dto.QuestionDto;
 import com.codestates.PreProject.question.entity.CommentOfQuestion;
 import com.codestates.PreProject.question.entity.Question;

@@ -21,6 +21,9 @@ public class Answer extends Auditable {
 
     private String content;
 
+    private String displayName;
+
+    private String email;
 
     private int likeCount;
 
