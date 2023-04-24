@@ -14,6 +14,8 @@ public enum ExceptionCode {
 
     QUESTION_EXISTS(409, "Member exists"),
 
+    NO_PERMISSION_POST(404, "Member not found"),
+
     VOTE_NOT_TWICE(409,"Vote Not twice"),
 
     VOTE_NOT_CANCEL(204,"Vote Not cancel"),

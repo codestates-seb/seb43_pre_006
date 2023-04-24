@@ -29,26 +29,40 @@ public class AnswerService {
 
     public List<Answer> createAnswer(Answer answer, Long questionId) {
         Question question = questionService.findQuestionById(questionId);
-
+        //Spring Security의 SecurityContextHolder에서 인증된 사용자 정보를 가져와 memberRepository를 사용하여 해당 사용자를 찾음.
         String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         Optional<Member> optionalUser = memberRepository.findByEmail(principal);
         Member member = optionalUser.orElseThrow(() -> new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
-
+        //답변 객체에 사용자와 질문을 설정하고 answerRepository를 사용하여 저장
         answer.setMember(member);
         answer.setQuestion(question);
         answerRepository.save(answer);
-
+        //마지막으로, 해당 질문에 대한 모든 답변 목록을 answerRepository.findByQuestionId(question.getQuestionId())를 사용하여 찾아 반환
         return answerRepository.findByQuestionId(question.getQuestionId());
     }
 
-    public Answer updateAnswer(Answer answer) {
+    public List<Answer> updateAnswer(Answer answer, Long questionId) {
+        Question question = questionService.findQuestionById(questionId); // question 찾고
+        Answer findAnswer = findAnswerById(answer.getAnswerId());// answer 찾고
+        //Spring Security의 SecurityContextHolder에서 해당 Answer 객체의 작성자와 현재 로그인한 사용자가 같은지를 확인하고
+        String principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
-        Answer findAnswer = findAnswerById(answer.getAnswerId());
+        if (!findAnswer.getMember().getEmail().equals(principal))
+            throw new BusinessLogicException(ExceptionCode.NO_PERMISSION_POST);
+        //Question 객체에 해당 Answer 객체가 포함되어 있는지도 확인.
+        if (!question.getAnswers().contains(findAnswer))
+            throw new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND);
 
-        Optional.ofNullable(answer.getContent())
-                .ifPresent(findAnswer::setContent);
+        findAnswer.setContent(answer.getContent());
+        answerRepository.save(findAnswer);
+        return answerRepository.findByQuestionId(question.getQuestionId());
 
-        return answerRepository.save(findAnswer);
+//        Answer findAnswer = findAnswerById(answer.getAnswerId());
+//
+//        Optional.ofNullable(answer.getContent())
+//                .ifPresent(findAnswer::setContent);
+//
+//        return answerRepository.save(findAnswer);
     }
 
     public void deleteAnswer(long answerId) {
@@ -68,7 +82,7 @@ public class AnswerService {
 
 
     public Answer findAnswerById(long answerId) {
-        Optional<Answer> optionalAnswer = answerRepository.findById(answerId);
+        Optional<Answer> optionalAnswer = answerRepository.findById(answerId); //optionalAnswer를 레포에서 answerId로 조회
         Answer answer = optionalAnswer.orElseThrow(() -> new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND));
         return answer;
     }

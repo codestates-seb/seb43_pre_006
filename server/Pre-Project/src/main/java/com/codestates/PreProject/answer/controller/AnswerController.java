@@ -33,18 +33,28 @@ public class AnswerController {
 
         Answer answer = mapper.answerPostDtoToAnswer(requestBody);
         List<Answer> answerList = answerService.createAnswer(answer, questionId);
-        return new ResponseEntity<>(mapper.answerListToAnswerRespDto(answerList), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.answerListToAnswerResponseDto(answerList), HttpStatus.CREATED);
     }
+
+//    @PatchMapping("/{answer-id}")
+//    public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
+//                                      @Validated @RequestBody AnswerDto.AnswerPatchDto requestBody) {
+//        requestBody.setAnswerId(answerId);
+//
+//        Answer answer = mapper.answerPatchDtoToAnswer(requestBody); // 수정하고자 하는 값
+//        Answer answer1 = answerService.updateAnswer(answer); // 수정된 값
+//
+//        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer1), HttpStatus.CREATED);
+//    }
 
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
+                                      @PathVariable("question-id") @Positive long questionId,
                                       @Validated @RequestBody AnswerDto.AnswerPatchDto requestBody) {
-        requestBody.setAnswerId(answerId);
-
-        Answer answer = mapper.answerPatchDtoToAnswer(requestBody); // 수정하고자 하는 값
-        Answer answer1 = answerService.updateAnswer(answer); // 수정된 값
-
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(answer1), HttpStatus.CREATED);
+        Answer answer = mapper.answerPatchDtoToAnswer(requestBody);
+        answer.setAnswerId(answerId);//필요한가? -> 필요 -> patch에 answerId 정보 없음
+        List<Answer> answerList = answerService.updateAnswer(answer, questionId);
+        return new ResponseEntity(mapper.answerListToAnswerResponseDto(answerList), HttpStatus.OK);
     }
 
     @GetMapping("/{answer-id}")

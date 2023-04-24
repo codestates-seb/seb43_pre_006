@@ -1,5 +1,6 @@
 package com.codestates.PreProject.question.dto;
 
+import com.codestates.PreProject.answer.dto.AnswerDto;
 import com.codestates.PreProject.question.entity.CommentOfQuestion;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,6 +45,8 @@ public class QuestionDto {
         private Integer viewCount;
         private String userName;
         private String userEmail;
+
+        private List<AnswerDto.AnswerResponseDto> answers; // 추가
 
         List<CommentOfQuestionDto.Response> commentOfQuestions;
 
