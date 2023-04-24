@@ -36,11 +36,9 @@ public class AnswerDto {
     @Setter
     public static class AnswerResponseDto {
         private Long answerId;
-
         public Long getQuestionId() {
             return questionId;
         }
-
         private Long questionId;
         private String displayName;
         private String email;

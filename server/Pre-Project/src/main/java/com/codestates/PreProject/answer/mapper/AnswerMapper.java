@@ -22,5 +22,7 @@ public interface AnswerMapper {
     @Mapping(source = "member.email",target = "email")
     AnswerDto.AnswerResponseDto answerToAnswerResponseDto(Answer answer);
 
+    List<AnswerDto.AnswerResponseDto> answerListToAnswerRespDto(List<Answer> answer);
+
     List<AnswerDto.AnswerResponseDto> answerToAnswerResponseDtos(List<Answer> answers);
 }

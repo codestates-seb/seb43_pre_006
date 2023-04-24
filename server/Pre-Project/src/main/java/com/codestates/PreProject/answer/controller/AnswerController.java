@@ -6,6 +6,7 @@ import com.codestates.PreProject.answer.mapper.AnswerMapper;
 import com.codestates.PreProject.answer.service.AnswerService;
 import com.codestates.PreProject.dto.SingleResponseDto;
 import com.codestates.PreProject.globaldto.MultiResponseDto;
+import com.codestates.PreProject.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,15 +29,11 @@ public class AnswerController {
 
     @PostMapping
     public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
-                                         @Validated  @RequestBody AnswerDto.AnswerPostDto requestBody) {
-
+                                     @Validated  @RequestBody AnswerDto.AnswerPostDto requestBody) {
 
         Answer answer = mapper.answerPostDtoToAnswer(requestBody);
-
-        answerService.createAnswer(answer, questionId);
-
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.answerToAnswerResponseDto(answer)), HttpStatus.CREATED);
-
+        List<Answer> answerList = answerService.createAnswer(answer, questionId);
+        return new ResponseEntity<>(mapper.answerListToAnswerRespDto(answerList), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{answer-id}")

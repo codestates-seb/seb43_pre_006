@@ -21,13 +21,9 @@ public class Answer extends Auditable {
 
     private String content;
 
-    private String displayName;
-
-    private String email;
-
     private int likeCount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 

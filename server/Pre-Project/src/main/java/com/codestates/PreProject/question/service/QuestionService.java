@@ -199,4 +199,10 @@ public class QuestionService {
     private void memberAuthentication(Question question,long authenticatedMemberId) {
         if(question.getMember().getMemberId() != authenticatedMemberId) throw new BusinessLogicException(ExceptionCode.MEMBER_AUTHENTICATION_ERROR);
     }
+
+    public Question findQuestionById(long questionId) {
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        Question question = optionalQuestion.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+        return question;
+    }
 }
