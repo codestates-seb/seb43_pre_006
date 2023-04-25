@@ -108,20 +108,11 @@ const SignUp = () => {
   const signUpSubmit = async () => {
     try {
       const response = await axios
-        .post(
-          `https://5517-124-111-225-247.ngrok-free.app/members/signup`,
-          {
-            displayName,
-            email,
-            password,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "ngrok-skip-browser-warning": "69420",
-            },
-          }
-        )
+        .post(`https://2c02-124-111-225-247.ngrok-free.app/members/signup`, {
+          displayName,
+          email,
+          password,
+        })
         .then(() => navigate("/login"));
     } catch (error) {
       console.log(error);
