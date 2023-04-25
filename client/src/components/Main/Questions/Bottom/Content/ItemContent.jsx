@@ -10,7 +10,7 @@ export default function ItemContent({ data }) {
 
   return (
     <Container>
-      <p>{question.content}</p>
+      <div dangerouslySetInnerHTML={{ __html: question.content }} />
     </Container>
   );
 }
