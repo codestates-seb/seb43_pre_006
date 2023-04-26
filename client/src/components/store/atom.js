@@ -10,3 +10,12 @@ export const loginState = atom({
   default: false,
 });
 
+export const titleText = atom({
+  key: "titleText",
+  default: "",
+});
+
+export const textEditorState = atom({
+  key: "textEditorState",
+  default: false,
+});

@@ -5,9 +5,8 @@ import { ReactComponent as CollectiveIcon } from "../Header/images/collectivesIc
 import { Link } from "react-router-dom";
 
 
-export default function NavTop() {
-  //useLocation ===url  
-  
+
+export default function NavTop() {    
   const NavList = {
     data: [
       {        
@@ -31,12 +30,6 @@ export default function NavTop() {
   };
 
   const navList = NavList.data;
-  
-  
-
-  
-  
-  
   return (
     <Container>
       <div className="nav-container">
@@ -49,15 +42,9 @@ export default function NavTop() {
               <NavTitle>Public</NavTitle>
             </li>
             {navList.map((navItem) => (
-              <li
-                
-                className={
-                  navItem.className
-                }                             
-              >
-                <Link
-                  to={`/`}
-                >
+
+              <li className={navItem.className}>
+                <Link to={`/`}>
                   {navItem.title === "Questions" ? (
                     <>
                       {navItem.icon}
@@ -99,7 +86,6 @@ const Container = styled.div`
       width: 100%;
       position: sticky;
       top: 80px;
-
       > ol {
         list-style: none;
         padding-left: 0;

@@ -6,21 +6,13 @@ import SideBar from "./../../SideBar/SideBar";
 import ItemContent from "./Content/ItemContent";
 import ItemTop from "./Content/ItemTop";
 import ItemLeft from "./Content/ItemLeft";
-import QuestionPageEditor from "./Content/QuestionPageEditor";
 import axios from "axios";
+import ToastEditorComment from "../ToastEditorComment";
 
 export default function QuestionItem({ data }) {
   const { questionId } = useParams();
   const question = data.find((el) => el.questionId === parseInt(questionId));
   // params와 일치하는 id 값을 찾아서, 내용 작성
-  console.log(question);
-  useEffect(() => {
-    axios
-      .get(
-        "https://01aa-124-111-225-247.ngrok-free.app/questions?page=1&size=10"
-      )
-      .then((res) => console.log(res));
-  });
 
   return (
     <Container>
@@ -36,7 +28,7 @@ export default function QuestionItem({ data }) {
             <ItemLeft data={data} />
             <ItemContent data={data} />
           </div>
-          <QuestionPageEditor />
+          <ToastEditorComment />
         </ItemContainer>
         <SideBar />
       </div>
@@ -74,11 +66,9 @@ const Container = styled.div`
 const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 300px);
 
-  width: auto;
-  .flex-style {
-    display: grid;
-    grid-template-columns: -webkit-max-content 1fr;
-    grid-template-columns: max-content 1fr;
+  > .flex-style {
+    display: flex;
   }
 `;
