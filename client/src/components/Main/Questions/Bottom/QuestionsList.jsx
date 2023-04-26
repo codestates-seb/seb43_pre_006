@@ -7,13 +7,11 @@ import axios from "axios";
 export default function QuestionsList() {
   const list = List.data;
 
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       "https://042c-124-111-225-247.ngrok-free.app/questions?page=1&size=10"
-  //     )
-  //     .then((res) => console.log(res));
-  // });
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/questions", { withCredentials: true })
+      .then((res) => console.log(res));
+  }, []);
 
   return (
     <>
@@ -21,7 +19,7 @@ export default function QuestionsList() {
         <Container key={idx}>
           <div className="left">
             <span>{el.score} votes</span>
-            <span>{el.answers.length} answers</span>
+            <span>{el.commentOfQuestions.length} answers</span>
             <span>{el.viewCount} views</span>
           </div>
           <div className="right">
@@ -47,6 +45,10 @@ const Container = styled.div`
     flex-shrink: 0;
     margin: 0 16px 4px 0;
     text-align: right;
+    gap: 6px;
+
+    & span:nth-of-type(1) {
+    }
   }
 
   > .right {
