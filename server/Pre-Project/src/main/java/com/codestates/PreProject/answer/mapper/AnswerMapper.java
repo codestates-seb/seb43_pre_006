@@ -1,4 +1,4 @@
-package com.codestates.PreProject.question.mapper;
+package com.codestates.PreProject.answer.mapper;
 
 import com.codestates.PreProject.answer.dto.AnswerDto;
 import com.codestates.PreProject.answer.dto.CommentOfAnswerDto;
@@ -15,27 +15,24 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface QuestionMapper {
+public interface AnswerMapper {
 
-    Question questionPostDtoToQuestion(QuestionDto.Post requestBody);
+    Answer answerPostDtoToAnswer(AnswerDto.Post requestBody);
 
-    Question questionPatchDtoToQuestion(QuestionDto.Patch requestBody);
-
-    @Mapping(source = "member.displayName",target = "userName")
-    @Mapping(source = "member.email",target = "userEmail")
-    QuestionDto.Response questionToQuestionResponseDto(Question question);
-
-    List<QuestionDto.Response> questionToQuestionResponseDtos(List<Question> questions);
-
-//    @Mapping(source = "question.questionId",target = "questionId")
-//    @Mapping(source = "member.displayName",target = "userName")
-//    @Mapping(source = "member.email", target = "userEmail")
-//    CommentOfQuestionDto.Response commentToCommentResponse(CommentOfQuestion commentOfQuestion);
-
-
+    Answer answerPatchDtoToAnswer(AnswerDto.Patch requestBody);
 
     @Mapping(source = "question.questionId",target = "questionId")
     @Mapping(source = "member.displayName",target = "userName")
+    @Mapping(source = "member.email",target = "userEmail")
+    AnswerDto.Response answerToAnswerResponseDto(Answer answer);
+
+
+    List<AnswerDto.Response> answerToAnswerResponseDtos(List<Answer> answers);
+
+    @Mapping(source = "answer.answerId",target = "answerId")
+    @Mapping(source = "member.displayName",target = "userName")
     @Mapping(source = "member.email", target = "userEmail")
-    AnswerDto.Response answerToAnswerResponse(Answer answer);
+    List<CommentOfAnswerDto.Response> commentToCommentResponse(List<CommentOfAnswer> commentOfAnswers);
+
+
 }

@@ -1,5 +1,6 @@
 package com.codestates.PreProject.question.entity;
 
+import com.codestates.PreProject.answer.entity.Answer;
 import com.codestates.PreProject.audit.Auditable;
 import com.codestates.PreProject.member.entity.Member;
 import lombok.Getter;
@@ -43,6 +44,16 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question")
     private List<CommentOfQuestion> commentOfQuestions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
+
+    public void setAnswer(Answer answer){
+        answers.add(answer);
+        if(answer.getQuestion() != this){
+            answer.setQuestion(this);
+        }
+    }
+
     public void setMember(Member member) {
         this.member = member;
         if (!this.member.getQuestions().contains(this)) {
@@ -50,10 +61,10 @@ public class Question extends Auditable {
         }
     }
 
-    public void setVoteOfQuestions(VoteOfQuestion voteOfQuestions) {
-        this.voteOfQuestions.add(voteOfQuestions);
-        if (voteOfQuestions.getQuestion() != this){
-            voteOfQuestions.setQuestion(this);
+    public void setVoteOfQuestion(VoteOfQuestion voteOfQuestion) {
+        this.voteOfQuestions.add(voteOfQuestion);
+        if (voteOfQuestion.getQuestion() != this){
+            voteOfQuestion.setQuestion(this);
         }
     }
 

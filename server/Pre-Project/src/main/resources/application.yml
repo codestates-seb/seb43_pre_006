@@ -3,10 +3,17 @@ spring:
     console:
       enabled: true
       path: /h2
+#  datasource:
+#    url: jdbc:h2:mem:test #h2 이용
   datasource:
-    url: jdbc:h2:mem:test
+    url: ${datasource_url}
+    username: ${datasource_username}
+    password: ${datasource_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       ddl-auto: create
     show-sql: true      # (2) SQL 쿼리 출력
@@ -48,10 +55,35 @@ logging:
         orm:
           jpa: DEBUG
 
+mail:
+  address:
+    admin: admin@gmail.com
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}  # 민감한 정보는 시스템 환경 변수로..
+    password: ${EMAIL_PASSWORD}  # 민감한 정보는 시스템 환경 변수로..
+    auth: true
+    starttls:
+      enable: true
+  subject:
+      member:
+        registration: 스택오버플로우 가입 축하!
+  template:
+      name:
+        member:
+          join: email-registration-member
+
+jwt:
+  key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 30 #30분.
+  refresh-token-expiration-minutes: 420 # 420분
+
 server:
   servlet:
     encoding:
       force-response: true
-mail:
-  address:
-    admin: admin@gmail.com
+
+
+
+

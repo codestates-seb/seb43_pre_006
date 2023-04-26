@@ -1,9 +1,12 @@
 package com.codestates.PreProject.member.entity;
 
+import com.codestates.PreProject.answer.entity.Answer;
+import com.codestates.PreProject.answer.entity.CommentOfAnswer;
 import com.codestates.PreProject.audit.Auditable;
 import com.codestates.PreProject.question.entity.CommentOfQuestion;
 import com.codestates.PreProject.question.entity.Question;
 import com.codestates.PreProject.question.entity.VoteOfQuestion;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
 public class Member extends Auditable {
 
     @Id
@@ -41,6 +45,25 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member")
     private List<CommentOfQuestion> commentOfQuestions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<Answer> answers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<CommentOfAnswer> commentOfAnswers = new ArrayList<>();
+
+    public void setCommentOfAnswer(CommentOfAnswer commentOfAnswer){
+        commentOfAnswers.add(commentOfAnswer);
+        if(commentOfAnswer.getMember() != this){
+            commentOfAnswer.setMember(this);
+        }
+    }
+
+    public void setAnswer(Answer answer) {
+        answers.add(answer);
+        if(answer.getMember() != this){
+            answer.setMember(this);
+        }
+    }
 
     public void setQuestion(Question question) { // 관계편의메서드 추가하기 쉽게 설계했고
         questions.add(question);

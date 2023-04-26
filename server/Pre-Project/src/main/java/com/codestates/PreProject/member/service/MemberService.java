@@ -3,9 +3,11 @@ package com.codestates.PreProject.member.service;
 import com.codestates.PreProject.auth.utils.CustomAuthorityUtils;
 import com.codestates.PreProject.exception.BusinessLogicException;
 import com.codestates.PreProject.exception.ExceptionCode;
+import com.codestates.PreProject.helper.event.MemberRegistrationApplicationEvent;
 import com.codestates.PreProject.member.entity.Member;
 import com.codestates.PreProject.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ public class MemberService {
     private final CustomAuthorityUtils authorityUtils;
     private final PasswordEncoder passwordEncoder;
 
+    private final ApplicationEventPublisher publisher;
 
     public Member createMember(Member member){
         verifyExistsEmail(member.getEmail());
@@ -36,10 +39,25 @@ public class MemberService {
         List<String> roles = authorityUtils.createRoles(member.getEmail());
         member.setRoles(roles);
 
-        return memberRepository.save(member);
+        Member savedMember = memberRepository.save(member);
+
+        publisher.publishEvent(new MemberRegistrationApplicationEvent(this,savedMember));
+        return savedMember;
 
     }
 
+    public void deleteMember(long memberId) {
+        Member findMember = findVerifiedMember(memberId);
+
+        memberRepository.delete(findMember);
+    }
+
+    public Member findVerifiedMember(long memberId) {
+        Optional<Member> optionalMember = memberRepository.findById(memberId);
+        Member member = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return member;
+    }
 
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
