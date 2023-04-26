@@ -23,15 +23,7 @@ export default function QuestionsBottom() {
 
   useEffect(() => {
     axios
-      .get(
-        "https://5517-124-111-225-247.ngrok-free.app/questions?page=1&size=10",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "ngrok-skip-browser-warning": "69420",
-          },
-        }
-      )
+      .get("http://localhost:8080/questions")
       .then((response) => {
         const data = response.data;
         const numQuestions = data.length;
