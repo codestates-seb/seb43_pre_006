@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as InfoIcon } from "../Header/images/infoIcon.svg";
 import { ReactComponent as QuestionIcon } from "../Header/images/questionIcon.svg";
 import { ReactComponent as CollectiveIcon } from "../Header/images/collectivesIcon.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function NavTop() {
@@ -10,24 +10,20 @@ export default function NavTop() {
   
   const NavList = {
     data: [
-      {
-        navId: 1,
+      {        
         className: `public-li question-Icon question-li`,
         title: "Questions",
         icon: <QuestionIcon />,        
       },
-      {
-        navId: 2,
+      {        
         className: "public-li",
         title: "Tags",
       },
-      {
-        navId: 3,
+      {        
         className: "public-li",
         title: "Users",
       },
-      {
-        navId: 4,
+      {        
         className: "public-li",
         title: "Companies",
       },
@@ -35,11 +31,11 @@ export default function NavTop() {
   };
 
   const navList = NavList.data;
-  const location = useLocation();
-  const path = location.pathname;
+  
+  
 
-  console.log(path);  
-  console.log(navList[0])
+  
+  
   
   return (
     <Container>
@@ -54,7 +50,7 @@ export default function NavTop() {
             </li>
             {navList.map((navItem) => (
               <li
-                key={navItem.navId}
+                
                 className={
                   navItem.className
                 }                             
@@ -171,7 +167,7 @@ const Container = styled.div`
 
 const NavTitle = styled.h2`
   display: flex;
-  padding: 16px 16px 4px 0px;
+  padding: 16px 16px 0px 0px;
   font-size: 11px;
   font-weight: 400;
   color: #6a737c;
