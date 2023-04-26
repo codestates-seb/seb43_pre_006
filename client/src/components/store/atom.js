@@ -12,5 +12,15 @@ export const loginState = atom({
 
 export const liClickEvent = atom({
   key: "liClickEvent",
-  default:"li",
-})
+  default: "li",
+});
+
+export const titleText = atom({
+  key: "titleText",
+  default: "",
+});
+
+export const textEditorState = atom({
+  key: "textEditorState",
+  default: false,
+});

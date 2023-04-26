@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { List } from "./ExampleList";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function QuestionsList() {
   const list = List.data;
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/questions", { withCredentials: true })
+      .then((res) => console.log(res));
+  }, []);
+
   return (
     <>
       {list.map((el, idx) => (
         <Container key={idx}>
           <div className="left">
             <span>{el.score} votes</span>
-            <span>{el.answers.length} answers</span>
+            <span>{el.commentOfQuestions.length} answers</span>
             <span>{el.viewCount} views</span>
           </div>
           <div className="right">
@@ -37,6 +45,10 @@ const Container = styled.div`
     flex-shrink: 0;
     margin: 0 16px 4px 0;
     text-align: right;
+    gap: 6px;
+
+    & span:nth-of-type(1) {
+    }
   }
 
   > .right {

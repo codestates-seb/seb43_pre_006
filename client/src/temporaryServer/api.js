@@ -1,9 +1,31 @@
-export const List = {
+const express = require("express");
+const cors = require("cors");
+const { v4: uuidv4 } = require("uuid");
+
+const app = express();
+// id 고유값 부여
+const corsOptions = {
+  origin: "http://localhost:3000", // 허용할 도메인
+  optionsSuccessStatus: 200,
+  credential: true,
+};
+app.use(cors(corsOptions));
+// cors 접근 설정
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.listen(8080, () => {
+  console.log("Server listening on port 8080");
+});
+
+const List = {
   data: [
     {
       questionId: 13,
       title: "안녕",
-      content: "안녕하세요",
+      content:
+        "<p><code>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅁㄴㅇㅁㄴㅇ</code><strong><code>ㅁㄴㅇㅁㄴㅇ</code></strong></p>",
       createdAt: "2023-04-19T18:33:15",
       modifiedAt: "2023-04-19T18:48:43",
       likeCount: 3,
@@ -128,3 +150,7 @@ export const List = {
     totalPages: 2,
   },
 };
+
+app.get("/questions", (req, res) => {
+  return res.json(List);
+});
