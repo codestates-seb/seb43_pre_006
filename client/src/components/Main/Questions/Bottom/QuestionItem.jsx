@@ -7,7 +7,7 @@ import ItemContent from "./Content/ItemContent";
 import ItemTop from "./Content/ItemTop";
 import ItemLeft from "./Content/ItemLeft";
 import axios from "axios";
-import ToastEditor from "../ToastEditor";
+import ToastEditorComment from "../ToastEditorComment";
 
 export default function QuestionItem({ data }) {
   const { questionId } = useParams();
@@ -28,7 +28,7 @@ export default function QuestionItem({ data }) {
             <ItemLeft data={data} />
             <ItemContent data={data} />
           </div>
-          <ToastEditor />
+          <ToastEditorComment />
         </ItemContainer>
         <SideBar />
       </div>
