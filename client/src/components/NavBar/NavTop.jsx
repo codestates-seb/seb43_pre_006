@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default function NavTop() {
-
-  //useLocation ===url  
-  
+export default function NavTop() {    
   const NavList = {
     data: [
       {        
@@ -32,9 +29,7 @@ export default function NavTop() {
     ],
   };
 
-
   const navList = NavList.data;
-
   return (
     <Container>
       <div className="nav-container">
@@ -47,11 +42,8 @@ export default function NavTop() {
               <NavTitle>Public</NavTitle>
             </li>
             {navList.map((navItem) => (
-              <li    
-                className={
-                  navItem.className
-                }                             
-              >
+
+              <li className={navItem.className}>
                 <Link to={`/`}>
                   {navItem.title === "Questions" ? (
                     <>
@@ -104,17 +96,6 @@ const Container = styled.div`
         .question-Icon {
           padding: 8px;
           padding-left: 8.5px;          
-          a {
-            display: flex;
-            align-items: flex-end;
-          }
-          svg {
-            margin-right: 5px;
-          }
-        }
-        .question-Icon {
-          padding: 8px;
-          padding-left: 8.5px;
           a {
             display: flex;
             align-items: flex-end;
