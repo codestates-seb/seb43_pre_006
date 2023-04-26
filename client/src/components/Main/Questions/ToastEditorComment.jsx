@@ -4,8 +4,13 @@ import { useRef } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import styled from "styled-components";
+import axios from "axios";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { textEditorState, titleText } from "../../store/atom";
 
 export default function ToastEditorComment() {
+  const [title, setTitle] = useRecoilState(titleText);
+  const [allowEditor, setAllowEditor] = useRecoilState(textEditorState);
   // Editor DOM 선택용
   const editorRef = useRef();
 
@@ -64,5 +69,4 @@ const BtnStyle = styled.button`
   box-shadow: inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
   font-weight: 400;
   border: solid 1px transparent;
-  
 `;
