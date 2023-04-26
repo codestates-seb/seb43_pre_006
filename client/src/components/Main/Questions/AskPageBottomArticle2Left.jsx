@@ -1,7 +1,17 @@
 import React from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { textEditorState, titleText } from "../../store/atom";
 
 export default function AskPageBottomArticle2Left() {
+  const [title, setTitle] = useRecoilState(titleText);
+  const [allowEdtior, setAllowEditor] = useRecoilState(textEditorState);
+
+  const saveTitle = () => {
+    if (allowEdtior === false) {
+      if (title !== "") setAllowEditor(!allowEdtior);
+    }
+  };
   return (
     <Container>
       <div className="top">
@@ -17,9 +27,10 @@ export default function AskPageBottomArticle2Left() {
           type="text"
           id="title"
           placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+          onChange={(e) => setTitle(e.target.value)}
         />
       </div>
-      <NextBtn>Next</NextBtn>
+      <NextBtn onClick={saveTitle}>Next</NextBtn>
     </Container>
   );
 }

@@ -12,6 +12,10 @@ import Main from "./components/Main/Main";
 import QuestionItem from "./components/Main/Questions/Bottom/QuestionItem";
 import { List } from "./components/Main/Questions/Bottom/ExampleList";
 import AskPage from "./components/Main/Questions/AskPage";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+// 찾아보기
+// 서버에서 쿠키에 접근할 수 있는 권한
 
 function App() {
   const location = useLocation();
