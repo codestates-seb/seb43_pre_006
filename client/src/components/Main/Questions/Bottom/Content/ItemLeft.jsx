@@ -14,10 +14,13 @@ export default function ItemLeft({ data }) {
     if (cookie) {
       const userId = cookie.split("=")[1];
       axios
-        .patch(`http://yourserver.com/api/questions/${questionId}`, {
-          score: question.score + 1,
-          userId,
-        })
+        .patch(
+          `https://2c02-124-111-225-247.ngrok-free.app/questions/${questionId}`,
+          {
+            score: question.score + 1,
+            userId,
+          }
+        )
         .then((response) => {
           console.log("Score updated successfully");
         })
@@ -26,6 +29,7 @@ export default function ItemLeft({ data }) {
         });
     } else {
       console.log("User is not logged in");
+      window.location.href = "http://localhost:3000/login";
     }
   };
 
@@ -59,7 +63,7 @@ export default function ItemLeft({ data }) {
       <UpBtn onClick={handleClick} viewBox="0 0 36 36">
         <path d="M2 25h32L18 9 2 25Z"></path>
       </UpBtn>
-      <span>{question.score}</span>
+      <span>{question.likeCount}</span>
       <DownBtn viewBox="0 0 36 36">
         <path d="M2 11h32L18 27 2 11Z"></path>
       </DownBtn>
