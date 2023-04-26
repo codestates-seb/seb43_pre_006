@@ -6,11 +6,15 @@ spring:
 #  datasource:
 #    url: jdbc:h2:mem:test #h2 이용
   datasource:
-    url: ${datasource_url}
-    username: ${datasource_username}
-    password: ${datasource_password}
+#    url: ${datasource_url}
+#    username: ${datasource_username}
+#    password: ${datasource_password}
+    url: jdbc:mysql://{AWS RDS Endpoint}/test?useSSL=false&characterEncoding=UTF-8&serve
+    username: {RDS Mysql Admin id}
+    password: {RDS Mysql Admin password}
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+  config:
+    domain: {AWS S3 Endpoint}
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
