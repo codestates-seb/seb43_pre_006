@@ -10,7 +10,3 @@ export const loginState = atom({
   default: false,
 });
 
-export const liClickEvent = atom({
-  key: "liClickEvent",
-  default:"li",
-})
