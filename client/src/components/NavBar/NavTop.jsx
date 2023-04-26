@@ -2,9 +2,45 @@ import styled from "styled-components";
 import { ReactComponent as InfoIcon } from "../Header/images/infoIcon.svg";
 import { ReactComponent as QuestionIcon } from "../Header/images/questionIcon.svg";
 import { ReactComponent as CollectiveIcon } from "../Header/images/collectivesIcon.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { List } from "../Main/Questions/Bottom/ExampleList";
 
 export default function NavTop() {
+  //useLocation ===url
+  const NavList = {
+    data: [
+      {
+        navId: 1,
+        className: "public-li question-Icon",
+        title: "Questions",
+        icon: <QuestionIcon />,
+        questionId: List.data.questionId,
+      },
+      {
+        navId: 2,
+        className: "public-li",
+        title: "Tags",
+      },
+      {
+        navId: 3,
+        className: "public-li",
+        title: "Users",
+      },
+      {
+        navId: 4,
+        className: "public-li",
+        title: "Companies",
+      },
+    ],
+  };
+  const navList = NavList.data;
+  const location = useLocation();
+  const path = location.pathname;
+
+  console.log(path);
+
+  const ex = NavList.data[0].title;
+
   return (
     <Container>
       <div className="nav-container">
@@ -14,23 +50,36 @@ export default function NavTop() {
               Home
             </li>
             <li>
-              <NavTitle>
-                <h2>Public</h2>
-              </NavTitle>
+              <NavTitle>Public</NavTitle>
             </li>
-            <li className="icon-li question-li">
-              <QuestionIcon />
-              <Link to="/">Question</Link>
-            </li>
-            <li className="public-li">
-              <Link to="/tags">Tags</Link>
-            </li>
-            <li className="public-li">
-              <Link to="/">Users</Link>
-            </li>
-            <li className="public-li">
-              <Link to="/">Companies</Link>
-            </li>
+            {navList.map((navItem) => (
+              <li
+                key={navItem.navId}
+                className={
+                  navItem.className +
+                  (path === "/" || `/${navItem.title.toLowerCase()}` === path
+                    ? " question-li"
+                    : "")
+                }
+              >
+                <Link
+                  to={`/${
+                    navItem.title.toLowerCase() === "questions"
+                      ? ""
+                      : navItem.title.toLowerCase()
+                  }`}
+                >
+                  {navItem.title === "Questions" ? (
+                    <>
+                      {navItem.icon}
+                      {navItem.title}
+                    </>
+                  ) : (
+                    navItem.title
+                  )}
+                </Link>
+              </li>
+            ))}
             <li className="collectives">
               <h2>Collectives</h2>
               <InfoIcon />
@@ -40,9 +89,7 @@ export default function NavTop() {
               Explore Collectives
             </li>
             <li className="teams-area">
-              <NavTitle>
-                <h2>Teams</h2>
-              </NavTitle>
+              <NavTitle>Teams</NavTitle>
             </li>
           </ol>
         </div>
@@ -53,7 +100,7 @@ export default function NavTop() {
 
 const Container = styled.div`
   position: sticky;
-  border-right: 1px solid rgba(215, 217, 220, 255);
+  border-right: 1px solid ${({ theme }) => theme.black100};
   width: auto;
   > .nav-container {
     height: 95%;
@@ -71,14 +118,25 @@ const Container = styled.div`
           padding: 8px;
           padding-left: 32.5px;
         }
+        .question-Icon {
+          padding: 8px;
+          padding-left: 8.5px;
+          a {
+            display: flex;
+            align-items: flex-end;
+          }
+          svg {
+            margin-right: 5px;
+          }
+        }
         .teams-area {
-          border-bottom: 1px solid rgba(215, 217, 220, 255);
+          border-bottom: 1px solid ${({ theme }) => theme.black100};
         }
         .question-li {
           font-weight: bold;
-          background: hsl(210, 8%, 95%);
-          color: hsl(210, 8%, 5%);
-          border-right: 3px solid rgb(244, 130, 37);
+          background: ${({ theme }) => theme.black050};
+          color: ${({ theme }) => theme.black900};
+          border-right: 3px solid ${({ theme }) => theme.orange400};
         }
         .collectives {
           display: flex;
@@ -118,17 +176,13 @@ const Container = styled.div`
   }
 `;
 
-const NavTitle = styled.div`
+const NavTitle = styled.h2`
   display: flex;
   padding: 16px 16px 4px 0px;
-
-  h2 {
-    font-size: 11px;
-    font-weight: 400;
-    color: #6a737c;
-    text-transform: uppercase;
-  }
-
+  font-size: 11px;
+  font-weight: 400;
+  color: #6a737c;
+  text-transform: uppercase;
   svg {
     fill: #6b737c;
   }
